@@ -1,5 +1,7 @@
-streamlit==1.8.1
-pandas==0.25.3
-numpy==1.18.1
-scikit-learn==0.22.1
+streamlit==1.11.1
+pandas==1.2.4
+numpy==1.19.5
+sentence-transformers==2.2.2
+pyabsa==1.16.4
+tokenizers==0.12.1
 protobuf==3.20.*
