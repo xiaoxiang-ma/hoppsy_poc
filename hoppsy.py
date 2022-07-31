@@ -31,11 +31,18 @@ import tokenizers
 # st.success("sentence_transformer loaded")
 # aspect_extractor = fetch_aspect_extractor()
 # st.success("aspect_extractor loaded")
-
-st.write('numpy ', np.__version__)
-st.write('hdbscan ', hdbscan.__version__)
-st.write('umap ', umap.__version__)
-
+try:
+    st.write('numpy ', np.__version__)
+except:
+    st.write('cannot print numpy version')
+try:
+    st.write('hdbscan ', hdbscan.__version__)
+except:
+    st.write('cannot print hdbscan version')
+try:
+    st.write('umap ', umap.__version__)
+except:
+    st.write('cannot print umap version')
 
 
 # with open('aspect_extractor.pkl', 'rb') as file:
