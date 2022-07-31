@@ -76,7 +76,7 @@ st.write("# Update topic categories")
 ###############################
 
 
-topics = st.text_input('Enter topic categories', 'service, food, appetizer, desserts, atmosphere, menu, price, staff, manager')
+topics = st.text_input('Enter topic categories', 'service, food, atmosphere, menu, price, staff, manager')
 topic_categories = topics.split(", ")
 
 st.write(topic_categories)
@@ -85,8 +85,17 @@ st.write(topic_categories)
 st.write("# Enter reviews")
 ###############################
 
-sample_review = '''The cucumber cocktail was very refreshing, the pork in the hangover ramen was a bit hard to chew...
-The pistachio icecream was a delight! Service was ok'''
+sample_review = '''Our server was fantastic and when he found out the wife loves roasted garlic and bone marrow, he added extra to our meal and another marrow to go!
+I LOVED their mussels cooked in this wine reduction, the duck was tender, and their potato dishes were delicious.
+Although I very much liked the look and sound of this place, the actual experience was a bit disappointing.
+I just don't know how this place managed to served the blandest food I have ever eaten when they are preparing Indian cuisine.
+The guys all had steaks, and our steak loving son who has had steak at the best and worst places said it was the best steak he's ever eaten.
+We thought you'd have to venture further away to get good sushi, but this place really hit the spot that night.
+Bland... Not a liking this place for a number of reasons and I don't want to waste time on bad reviewing.. I'll leave it at that...
+They have a good selection of food including a massive meatloaf sandwich, a crispy chicken wrap, a delish tuna melt and some tasty burgers.
+Great Subway, in fact it's so good when you come here every other Subway will not meet your expectations.
+He was extremely rude and really, there are so many other restaurants I would love to dine at during a weekend in Vegas.
+The service was a little slow , considering that were served by 3 people servers so the food was coming in a slow pace.'''
 user_review = st.text_area('Text to analyze', sample_review).split("\n")
 st.write(user_review)
 
