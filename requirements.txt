@@ -1,9 +1,9 @@
 streamlit==1.11.1
 pandas==1.2.4
-numpy==1.21.6
+numpy==1.21.1
 sentence-transformers==2.2.2
 pyabsa==1.16.4
-hdbscan==0.8.28
-umap-learn==0.5.3
+hdbscan==0.8.27
+umap-learn==0.5.2
 tokenizers==0.12.1
 protobuf==3.20.*
