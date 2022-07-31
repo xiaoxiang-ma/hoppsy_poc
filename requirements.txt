@@ -3,5 +3,6 @@ pandas==1.2.4
 numpy==1.19.5
 sentence-transformers==2.2.2
 pyabsa==1.16.4
+hdbscan==0.8.28
 tokenizers==0.12.1
 protobuf==3.20.*
