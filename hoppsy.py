@@ -164,3 +164,15 @@ st.write("# Update topic categories")
 #     )
 
 #     st.write(df_display)
+
+
+# Build that can import correctly with Python 3.8
+# hdbscan==0.8.27
+# numpy==1.23.1
+# umap-learn==0.5.1
+# streamlit==1.11.1
+# pandas==1.2.4
+# sentence-transformers==2.2.2
+# pyabsa==1.16.4
+# tokenizers==0.12.1
+# protobuf==3.20.*
