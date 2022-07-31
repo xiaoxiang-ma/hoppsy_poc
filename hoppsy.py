@@ -10,6 +10,7 @@ from numpy.linalg import norm
 from pyabsa.functional import ATEPCCheckpointManager
 from sentence_transformers import SentenceTransformer
 import tokenizers
+import copy
 
 
 
@@ -27,22 +28,23 @@ def fetch_sentence_transformer():
 st.write("# Loading resources")
 ###############################
 
-sentence_transformer = fetch_sentence_transformer()
+entence_transformer = copy.deepcopy(fetch_sentence_transformer())
 st.success("sentence_transformer loaded")
-aspect_extractor = fetch_aspect_extractor()
+aspect_extractor = copy.deepcopy(fetch_aspect_extractor())
 st.success("aspect_extractor loaded")
-try:
-    st.write('numpy ', np.__version__)
-except:
-    st.write('cannot print numpy version')
-try:
-    st.write('hdbscan ', hdbscan.__version__)
-except:
-    st.write('cannot print hdbscan version')
-try:
-    st.write('umap ', umap.__version__)
-except:
-    st.write('cannot print umap version')
+
+# try:
+#     st.write('numpy ', np.__version__)
+# except:
+#     st.write('cannot print numpy version')
+# try:
+#     st.write('hdbscan ', hdbscan.__version__)
+# except:
+#     st.write('cannot print hdbscan version')
+# try:
+#     st.write('umap ', umap.__version__)
+# except:
+#     st.write('cannot print umap version')
 
 
 # with open('aspect_extractor.pkl', 'rb') as file:
