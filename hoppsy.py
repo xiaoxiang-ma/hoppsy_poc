@@ -10,16 +10,16 @@ from numpy.linalg import norm
 from pyabsa.functional import ATEPCCheckpointManager
 from sentence_transformers import SentenceTransformer
 import tokenizers
-import copy
+# import copy
 
 
 
-@st.cache(hash_funcs={tokenizers.Tokenizer: lambda _: None, tokenizers.AddedToken: lambda _: None})
+@st.cache(hash_funcs={tokenizers.Tokenizer: lambda _: None, tokenizers.AddedToken: lambda _: None}, allow_output_mutation=True)
 def fetch_aspect_extractor():
     aspect_extractor = ATEPCCheckpointManager.get_aspect_extractor(checkpoint='english')
     return aspect_extractor
 
-@st.cache
+@st.cache(allow_output_mutation=True)
 def fetch_sentence_transformer():
     sentence_transformer = SentenceTransformer('all-mpnet-base-v2')
     return sentence_transformer
@@ -28,9 +28,9 @@ def fetch_sentence_transformer():
 st.write("# Loading resources")
 ###############################
 
-entence_transformer = copy.deepcopy(fetch_sentence_transformer())
+sentence_transformer = fetch_sentence_transformer()
 st.success("sentence_transformer loaded")
-aspect_extractor = copy.deepcopy(fetch_aspect_extractor())
+aspect_extractor = fetch_aspect_extractor()
 st.success("aspect_extractor loaded")
 
 # try:
