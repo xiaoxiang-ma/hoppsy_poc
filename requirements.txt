@@ -4,5 +4,6 @@ numpy==1.21.6
 sentence-transformers==2.2.2
 pyabsa==1.16.4
 hdbscan==0.8.28
+umap-learn==0.5.3
 tokenizers==0.12.1
 protobuf==3.20.*
