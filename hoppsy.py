@@ -21,7 +21,7 @@ def fetch_aspect_extractor():
 
 @st.cache(allow_output_mutation=True)
 def fetch_sentence_transformer():
-    sentence_transformer = SentenceTransformer('all-mpnet-base-v2')
+    sentence_transformer = SentenceTransformer('all-MiniLM-L6-v2')
     return sentence_transformer
 
 ###############################
@@ -180,7 +180,7 @@ if st.button('Compute Insights'):
         aspect_topic=('topic', lambda x: list(x)),
         sentiment_confidence=('confidence', lambda x: list(x)),
         topic_confidence=('topic_strength', lambda x: list(x)),
-    )
+    ).reset_index()
 
     st.write(df_display)
 
