@@ -14,12 +14,12 @@ import tokenizers
 
 
 
-@st.cache(hash_funcs={tokenizers.Tokenizer: lambda _: None, tokenizers.AddedToken: lambda _: None}, allow_output_mutation=True)
+# @st.cache(hash_funcs={tokenizers.Tokenizer: lambda _: None, tokenizers.AddedToken: lambda _: None}, allow_output_mutation=True)
 def fetch_aspect_extractor():
     aspect_extractor = ATEPCCheckpointManager.get_aspect_extractor(checkpoint='english')
     return aspect_extractor
 
-@st.cache(allow_output_mutation=True)
+# @st.cache(allow_output_mutation=True)
 def fetch_sentence_transformer():
     sentence_transformer = SentenceTransformer('all-MiniLM-L6-v2')
     return sentence_transformer
