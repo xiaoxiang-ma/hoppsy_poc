@@ -1,25 +1,27 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-import pickle
+# import pickle
 
-import hdbscan
+# import hdbscan
 # import umap
 from numpy.linalg import norm
 
 from pyabsa.functional import ATEPCCheckpointManager
 from sentence_transformers import SentenceTransformer
-import tokenizers
-# import copy
+# import tokenizers
+import copy
 # from streamlit import caching
 
 
-@st.cache(hash_funcs={tokenizers.Tokenizer: lambda _: None, tokenizers.AddedToken: lambda _: None}, allow_output_mutation=True)
+# @st.cache(hash_funcs={tokenizers.Tokenizer: lambda _: None, tokenizers.AddedToken: lambda _: None}, allow_output_mutation=True)
+@st.experimental_singleton
 def fetch_aspect_extractor():
     aspect_extractor = ATEPCCheckpointManager.get_aspect_extractor(checkpoint='english')
     return aspect_extractor
 
-@st.cache(allow_output_mutation=True)
+# @st.cache(allow_output_mutation=True)
+@st.experimental_singleton
 def fetch_sentence_transformer():
     sentence_transformer = SentenceTransformer('all-MiniLM-L6-v2')
     return sentence_transformer
@@ -36,6 +38,9 @@ with st.spinner('Loading sentence transformer'):
 with st.spinner('Loading aspect extractor'):
     aspect_extractor = fetch_aspect_extractor()
 
+# cloned_output = copy.deepcopy(my_cached_function(...))
+
+# cloned_output = copy.deepcopy(my_cached_function(...))
 # with st.spinner('Loading dimension reducer'):
 #     with open('POC_umap_reducer.pkl', 'rb') as file:
 #         umap_reducer = pickle.load(file)
@@ -196,21 +201,12 @@ if st.button('Compute Insights'):
     # del label_dict 
     del atepc_result
     del reviews_absa
-    # del inference_aspects
-    # del inference_aspects_embeddings
+    del sentence_transformer
+    del aspect_extractor
+    del assignments
+    del aspects_embeddings
     # del inference_aspects_embeddings_umap
 
 if st.button('Start Over'):
     # st.caching.clear_cache()
     st.experimental_rerun()
-
-# Build that can import correctly with Python 3.8
-# hdbscan==0.8.27
-# numpy==1.23.1
-# umap-learn==0.5.1
-# streamlit==1.11.1
-# pandas==1.2.4
-# sentence-transformers==2.2.2
-# pyabsa==1.16.4
-# tokenizers==0.12.1
-# protobuf==3.20.*
