@@ -29,24 +29,24 @@ st.write("## Hoppsy ML POC")
 st.write("Scenario: Buisness owners can have a break down of their reviews by different categories...")
 ###############################
 
-try:
-    with st.spinner('Loading sentence transformer'):
-        with open('sentence_transformer.pkl', 'rb') as file:
-            sentence_transformer = pickle.load(file)
+# try:
+#     with st.spinner('Loading sentence transformer'):
+#         with open('sentence_transformer.pkl', 'rb') as file:
+#             sentence_transformer = pickle.load(file)
 
-    with st.spinner('Loading aspect extractor'):
-        with open('aspect_extractor.pkl', 'rb') as file:
-            aspect_extractor = pickle.load(file)
-except:
-    with st.spinner('Loading sentence transformer'):
-        sentence_transformer = fetch_sentence_transformer()
-        with open('sentence_transformer.pkl', 'wb') as file:
-            pickle.dump(sentence_transformer, file)
+#     with st.spinner('Loading aspect extractor'):
+#         with open('aspect_extractor.pkl', 'rb') as file:
+#             aspect_extractor = pickle.load(file)
+# except:
+with st.spinner('Loading sentence transformer'):
+    sentence_transformer = fetch_sentence_transformer()
+    # with open('sentence_transformer.pkl', 'wb') as file:
+    #     pickle.dump(sentence_transformer, file)
 
-    with st.spinner('Loading aspect extractor'):
-        aspect_extractor = fetch_aspect_extractor()
-        with open('aspect_extractor.pkl', 'wb') as file:
-            pickle.dump(aspect_extractor, file)
+with st.spinner('Loading aspect extractor'):
+    aspect_extractor = fetch_aspect_extractor()
+    # with open('aspect_extractor.pkl', 'wb') as file:
+    #     pickle.dump(aspect_extractor, file)
 
 with st.spinner('Loading dimension reducer'):
     with open('POC_umap_reducer.pkl', 'rb') as file:
