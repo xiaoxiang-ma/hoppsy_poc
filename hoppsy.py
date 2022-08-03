@@ -11,7 +11,8 @@ from pyabsa.functional import ATEPCCheckpointManager
 from sentence_transformers import SentenceTransformer
 # import tokenizers
 # import copy
-
+from streamlit import caching
+from streamlit.ScriptRunner import RerunException
 
 
 # @st.cache(hash_funcs={tokenizers.Tokenizer: lambda _: None, tokenizers.AddedToken: lambda _: None}, allow_output_mutation=True)
@@ -177,6 +178,9 @@ if st.button('Compute Insights'):
     del inference_aspects_embeddings_umap
     del df_display
 
+if st.button('Start Over'):
+    caching.clear_cache()
+    raise RerunException
 
 # Build that can import correctly with Python 3.8
 # hdbscan==0.8.27
