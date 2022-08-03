@@ -9,18 +9,17 @@ from numpy.linalg import norm
 
 from pyabsa.functional import ATEPCCheckpointManager
 from sentence_transformers import SentenceTransformer
-# import tokenizers
+import tokenizers
 # import copy
-from streamlit import caching
-from streamlit.ScriptRunner import RerunException
+# from streamlit import caching
 
 
-# @st.cache(hash_funcs={tokenizers.Tokenizer: lambda _: None, tokenizers.AddedToken: lambda _: None}, allow_output_mutation=True)
+@st.cache(hash_funcs={tokenizers.Tokenizer: lambda _: None, tokenizers.AddedToken: lambda _: None}, allow_output_mutation=True)
 def fetch_aspect_extractor():
     aspect_extractor = ATEPCCheckpointManager.get_aspect_extractor(checkpoint='english')
     return aspect_extractor
 
-# @st.cache(allow_output_mutation=True)
+@st.cache(allow_output_mutation=True)
 def fetch_sentence_transformer():
     sentence_transformer = SentenceTransformer('all-MiniLM-L6-v2')
     return sentence_transformer
@@ -179,8 +178,8 @@ if st.button('Compute Insights'):
     del df_display
 
 if st.button('Start Over'):
-    caching.clear_cache()
-    raise RerunException
+    st.caching.clear_cache()
+    st.experimental_rerun()
 
 # Build that can import correctly with Python 3.8
 # hdbscan==0.8.27
