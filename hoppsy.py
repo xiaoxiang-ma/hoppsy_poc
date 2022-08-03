@@ -178,7 +178,7 @@ if st.button('Compute Insights'):
     del df_display
 
 if st.button('Start Over'):
-    st.caching.clear_cache()
+    # st.caching.clear_cache()
     st.experimental_rerun()
 
 # Build that can import correctly with Python 3.8
