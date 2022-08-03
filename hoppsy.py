@@ -1,27 +1,27 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-# import pickle
+import pickle
 
-# import hdbscan
+import hdbscan
 # import umap
 from numpy.linalg import norm
 
 from pyabsa.functional import ATEPCCheckpointManager
 from sentence_transformers import SentenceTransformer
-# import tokenizers
+import tokenizers
 import copy
 # from streamlit import caching
 
 
-# @st.cache(hash_funcs={tokenizers.Tokenizer: lambda _: None, tokenizers.AddedToken: lambda _: None}, allow_output_mutation=True)
-@st.experimental_singleton
+@st.cache(hash_funcs={tokenizers.Tokenizer: lambda _: None, tokenizers.AddedToken: lambda _: None}, allow_output_mutation=True)
+# @st.experimental_singleton
 def fetch_aspect_extractor():
     aspect_extractor = ATEPCCheckpointManager.get_aspect_extractor(checkpoint='english')
     return aspect_extractor
 
-# @st.cache(allow_output_mutation=True)
-@st.experimental_singleton
+@st.cache(allow_output_mutation=True)
+# @st.experimental_singleton
 def fetch_sentence_transformer():
     sentence_transformer = SentenceTransformer('all-MiniLM-L6-v2')
     return sentence_transformer
