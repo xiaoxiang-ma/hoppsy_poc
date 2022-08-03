@@ -4,12 +4,12 @@ import numpy as np
 import pickle
 
 import hdbscan
-import umap
+# import umap
 from numpy.linalg import norm
 
 from pyabsa.functional import ATEPCCheckpointManager
 from sentence_transformers import SentenceTransformer
-import tokenizers
+# import tokenizers
 # import copy
 
 
@@ -48,8 +48,6 @@ except:
         with open('aspect_extractor.pkl', 'wb') as file:
             pickle.dump(aspect_extractor, file)
 
-
-
 with st.spinner('Loading dimension reducer'):
     with open('POC_umap_reducer.pkl', 'rb') as file:
         umap_reducer = pickle.load(file)
@@ -69,7 +67,7 @@ st.write("#### Define Topic Categories")
 ###############################
 
 
-topics = st.text_input('Enter a few topic categories here (Separated by commas & Command + Enter to apply):', 'service, food, atmosphere, menu, price, staff, manager')
+topics = st.text_input('Enter a few topic categories here (Separated by commas & Command + Enter to apply):', 'service, food, atmosphere, environment, menu, price, staff')
 topic_categories = topics.split(", ")
 
 st.write(topic_categories)
@@ -78,17 +76,7 @@ st.write(topic_categories)
 st.write("#### Enter Reviews")
 ###############################
 
-sample_review = '''Our server was fantastic and when he found out the wife loves roasted garlic and bone marrow, he added extra to our meal and another marrow to go!
-I LOVED their mussels cooked in this wine reduction, the duck was tender, and their potato dishes were delicious.
-Although I very much liked the look and sound of this place, the actual experience was a bit disappointing.
-I just don't know how this place managed to served the blandest food I have ever eaten when they are preparing Indian cuisine.
-The guys all had steaks, and our steak loving son who has had steak at the best and worst places said it was the best steak he's ever eaten.
-We thought you'd have to venture further away to get good sushi, but this place really hit the spot that night.
-Bland... Not a liking this place for a number of reasons and I don't want to waste time on bad reviewing.. I'll leave it at that...
-They have a good selection of food including a massive meatloaf sandwich, a crispy chicken wrap, a delish tuna melt and some tasty burgers.
-Great Subway, in fact it's so good when you come here every other Subway will not meet your expectations.
-He was extremely rude and really, there are so many other restaurants I would love to dine at during a weekend in Vegas.
-The service was a little slow , considering that were served by 3 people servers so the food was coming in a slow pace.'''
+sample_review = '''E.g. The sushi were very flavorful, and the wasabi here was definitely a highlight'''
 user_review = st.text_area('Enter some reviews here (Separated by newline/Enter & Command + Enter to apply):', sample_review).split("\n")
 st.write(user_review)
 
@@ -160,7 +148,7 @@ if st.button('Compute Insights'):
         inference_aspects = reviews_absa['aspect'].tolist()
         inference_aspects_embeddings = embed(sentence_transformer, inference_aspects)
         inference_aspects_embeddings_umap = umap_reducer.transform(inference_aspects_embeddings)
-        test_labels, strengths = hdbscan.approximate_predict(hdbscan_clusters, inference_aspects_embeddings_umap)
+        test_labels, _ = hdbscan.approximate_predict(hdbscan_clusters, inference_aspects_embeddings_umap)
 
         reviews_absa['topic'] = [label_dict[i] for i in test_labels]
         reviews_absa['topic_strength'] = [label_strength_dict[i] for i in test_labels]
@@ -173,8 +161,21 @@ if st.button('Compute Insights'):
             sentiment_confidence=('confidence', lambda x: list(x)),
             topic_confidence=('topic_strength', lambda x: list(x)),
         ).reset_index()
-        st.write("#### Discover Insights")
-        st.write(df_display)
+    st.write("#### Discover Insights")
+    st.write(df_display)
+
+    del topic_categories_embeddings
+    del clusters_embedding
+    del similarities
+    del label_strength
+    del label_strength_dict
+    del label_dict 
+    del atepc_result
+    del reviews_absa
+    del inference_aspects
+    del inference_aspects_embeddings
+    del inference_aspects_embeddings_umap
+    del df_display
 
 
 # Build that can import correctly with Python 3.8
